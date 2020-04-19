@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Connect"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="50sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="542dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/phonenumber"
+            android:layout_width="244dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="195dp"
+            android:hint = "Enter Phone No"
+            android:textStyle="italic"
+            android:paddingLeft="70dp"
+            android:background="@drawable/phoneno"/>
+
+        <EditText
+            android:id="@+id/code"
+            android:layout_width="244dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="6dp"
+            android:hint="Enter Code Sent"
+            android:paddingLeft="70dp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phonenumber"
+            android:background="@drawable/code"/>
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="186dp"
+            android:layout_height="71dp"
+            android:layout_gravity="center"
+            android:layout_margin="40dp"
+            android:text="Send Verification Code"
+            android:textColorHighlight="#FF5722"
+            android:textStyle="bold"
+            android:background="@drawable/verifybtn"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stay Connected All the Time"
+        android:textColor="#00B0FF"
+        android:textColorHighlight="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="28dp"
+        android:text="Chat from anywhere around the World"
+        android:textColor="#00B0FF"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+</LinearLayout>
