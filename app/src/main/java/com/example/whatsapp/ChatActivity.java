@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 import com.example.whatsapp.Chat.ChatObject;
@@ -49,6 +50,18 @@ public class ChatActivity extends AppCompatActivity {
 
         mChatObject = (ChatObject) getIntent().getSerializableExtra("chatObject");
         Button mSend = findViewById(R.id.send);
+        TextView mChatName = findViewById(R.id.changeName);
+        Button mBackBtn = findViewById(R.id.backBtn);
+
+        //mChatName.setText(getIntent().getStringExtra("chatName"));
+        mBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
         mChatMessagesDb = FirebaseDatabase.getInstance().getReference().child("chat").child(mChatObject.getChatId()).child("messages");
 
         mSend.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +82,7 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         if (dataSnapshot.exists()){
-                            String creatorID = "",message = "",creatorName = "";
+                            String creatorID = "",message = "",creatorName = "",profileImageLink = "";
                             if (dataSnapshot.child("message").getValue() != null){
                                 message = dataSnapshot.child("message").getValue().toString();
                             }
@@ -79,7 +92,13 @@ public class ChatActivity extends AppCompatActivity {
                             if (dataSnapshot.child("creatorName").getValue()!=null){
                                 creatorName = dataSnapshot.child("creatorName").getValue().toString();
                             }
+                            if (dataSnapshot.hasChild("creatorProfile")){
+                                if (dataSnapshot.child("creatorProfile").getValue()!=null){
+                                    profileImageLink = dataSnapshot.child("creatorProfile").getValue().toString();
+                                }
+                            }
                             MessageObject mMessageObject = new MessageObject(creatorID,message,creatorName);
+                            mMessageObject.setCreatorProfile(profileImageLink);
                             messageList.add(mMessageObject);
                             mChatLayoutManager.scrollToPosition(messageList.size()-1);
                             mChatAdapter.notifyDataSetChanged();
@@ -116,6 +135,11 @@ public class ChatActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                     if (dataSnapshot.child("name").getValue()!=null)
                         currentUser.setName(dataSnapshot.child("name").getValue().toString());
+                    if (dataSnapshot.hasChild("image")){
+                        if (dataSnapshot.child("image").getValue()!=null){
+                            currentUser.setProfileImageLink(dataSnapshot.child("image").getValue().toString());
+                        }
+                    }
                 }
             }
             @Override
@@ -134,6 +158,7 @@ public class ChatActivity extends AppCompatActivity {
             final Map newMessageMap = new HashMap();
             newMessageMap.put("creatorId", FirebaseAuth.getInstance().getUid());
             newMessageMap.put("creatorName",currentUser.getName());
+            newMessageMap.put("creatorProfile",currentUser.getProfileImageLink());
             newMessageMap.put("message",mMessage.getText().toString());
             newMessageDb.updateChildren(newMessageMap);
             mMessage.setText(null);

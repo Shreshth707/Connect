@@ -9,12 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.whatsapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private ArrayList<MessageObject> messageList;
@@ -47,6 +50,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public void onBindViewHolder(@NonNull MessageViewHolder holder, final int position) {
         holder.mMessage.setText(messageList.get(position).getMessage());
         holder.mSender.setText(messageList.get(position).getSenderName());
+        if (messageList.get(position).getCreatorProfile()!=""){
+            Glide.with(holder.itemView).load(messageList.get(position).getCreatorProfile()).into(holder.mProfileImage);
+        }
     }
 
     @Override
@@ -57,8 +63,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
      class MessageViewHolder extends RecyclerView.ViewHolder{
          TextView mMessage,mSender;
          LinearLayout mLayout;
+         CircleImageView mProfileImage;
          MessageViewHolder (View view){
             super(view);
+            mProfileImage = view.findViewById(R.id.profileImage);
             mMessage = view.findViewById(R.id.message);
             mSender = view.findViewById(R.id.sender);
             mLayout = view.findViewById(R.id.layout);

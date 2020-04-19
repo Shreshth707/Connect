@@ -11,5 +11,7 @@
     <color name="blue">#0080FF</color>
     <color name="purple">#AA00FF</color>
     <color name="white">#FFFFFF</color>
+    <color name = "messageTextBarColor">#668DC0</color>
+    <color name ="messageTextColor">#9DE4BE</color>
 
 </resources>

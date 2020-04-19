@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:gravity="right"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
 
-        android:id="@+id/sender"
-        android:layout_gravity="right"
+
+        <TextView
+
+            android:id="@+id/sender"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="#009688"
-        android:textColor="#1A34C5"
-        android:textSize="20sp" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/message"
-        android:maxWidth="300dp"
-        android:layout_gravity="right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:background="#4CAF50"
-        android:textColor="#000000"
-        android:textSize="30sp" />
+        <TextView
+            android:id="@+id/message"
+            android:maxWidth="300dp"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/messageright"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:id="@+id/profileImage"
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_width="2dp"
+            android:padding="5sp"
+            android:layout_gravity="right"
+            app:civ_border_color="#FF000000"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>

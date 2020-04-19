@@ -1,7 +1,7 @@
 package com.example.whatsapp.Chat;
 
 public class MessageObject {
-    String messageId,senderId,message,senderName;
+    String messageId,senderId,message,senderName,creatorProfile = "";
 
 
     public MessageObject(String senderId,String message,String senderName){
@@ -9,6 +9,7 @@ public class MessageObject {
         this.message = message;
         this.senderName = senderName;
     }
+
     public MessageObject(String messageId,String senderId,String message,String senderName){
         this.messageId = messageId;
         this.senderId = senderId;
@@ -16,7 +17,13 @@ public class MessageObject {
         this.senderName = senderName;
     }
 
+    public void setCreatorProfile(String creatorProfile) {
+        this.creatorProfile = creatorProfile;
+    }
 
+    public String getCreatorProfile() {
+        return creatorProfile;
+    }
 
     public String getSenderId() {
         return senderId;

@@ -90,11 +90,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
         return chatList.size();
     }
 
-    public class ChatListViewHolder extends RecyclerView.ViewHolder{
-        public TextView mTitle;
-        public CircleImageView mChatIcon;
-        public LinearLayout mLayout;
-        public ChatListViewHolder (View view){
+     class ChatListViewHolder extends RecyclerView.ViewHolder{
+         TextView mTitle;
+         CircleImageView mChatIcon;
+         LinearLayout mLayout;
+         ChatListViewHolder (View view){
             super(view);
             mChatIcon = view.findViewById(R.id.profileImage);
             mTitle = view.findViewById(R.id.title);
