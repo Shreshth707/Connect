@@ -5,17 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingsActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/mainpagebackground">
 
+    n<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="300dp"
+    android:orientation="horizontal"
+    android:layout_gravity="center">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/profileImage"
+        android:src="@mipmap/ic_launcher_round"
+        app:civ_border_width="2dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        app:civ_border_color="#FF000000"/>
+
+</LinearLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Change Name"
+        android:layout_margin="10dp"
+        android:text="Update Profile"
         android:id="@+id/changeName"/>
-    <Button
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign out"
-        android:id="@+id/logout"/>
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:visibility="invisible"/>
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        android:text="Sign out" />
 
 </LinearLayout>

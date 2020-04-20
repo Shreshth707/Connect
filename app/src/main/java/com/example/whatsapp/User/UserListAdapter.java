@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.whatsapp.MainPage;
 import com.example.whatsapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserListViewHolder> {
@@ -45,6 +48,9 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
     public void onBindViewHolder(@NonNull final UserListViewHolder holder, int position) {
         holder.mName.setText(UserList.get(position).getName());
         holder.mPhone.setText(UserList.get(position).getPhone());
+        if(UserList.get(position).getProfileImageLink()!=""){
+            Glide.with(holder.itemView).load(UserList.get(position).getProfileImageLink()).into(holder.mProfileImage);
+        }
         holder.mAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -64,8 +70,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
         TextView mName,mPhone;
         CheckBox mAdd;
         LinearLayout mLayout;
+        CircleImageView mProfileImage;
         UserListViewHolder (View view){
             super(view);
+            mProfileImage = view.findViewById(R.id.profileImage);
             mName = view.findViewById(R.id.name);
             mPhone = view.findViewById(R.id.phone);
             mAdd = view.findViewById(R.id.add);

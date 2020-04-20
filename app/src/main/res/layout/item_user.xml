@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="20sp"
     android:id="@+id/layout">
@@ -9,14 +10,30 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_gravity="center">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:id="@+id/profileImage"
+                android:src="@mipmap/ic_launcher_round"
+                app:civ_border_width="2dp"
+                android:padding="20sp"
+                android:layout_gravity="center_vertical"
+                app:civ_border_color="#FF000000"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="name"
+            android:background="@drawable/messageright"
+            android:text="Name"
             android:textSize="30sp" />
 
         <TextView
@@ -25,6 +42,8 @@
             android:layout_height="wrap_content"
             android:text="phone"
             android:textSize="25sp" />
+            </LinearLayout>
+
 
     </LinearLayout>
     <View
@@ -36,6 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="right"
         android:id="@+id/add"/>
 
 
