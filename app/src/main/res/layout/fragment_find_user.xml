@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FindUserActivity"
-    android:orientation="vertical"
-    android:background="#FFFFFF">
+    tools:context=".fragments.find_userFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:orientation="vertical"
+      android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_marginTop="40dp"
@@ -72,14 +78,12 @@
             android:hint="Search"
             android:textSize="15dp"/>
     </LinearLayout>
-
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_below="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/userlist_layout">
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,16 +91,13 @@
             android:scrollbars="vertical">
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:id="@+id/refreshLayout"
         android:orientation="vertical">
-
-
     </LinearLayout>
+  </RelativeLayout>
 
-
-</RelativeLayout>
+</FrameLayout>

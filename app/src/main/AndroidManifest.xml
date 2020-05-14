@@ -20,7 +20,6 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".AddUserDetailsActivity" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".FindUserActivity" />
         <activity android:name=".MainPage" />
         <activity android:name=".LoginActivity">
             <intent-filter>

@@ -1,22 +1,26 @@
-package com.example.whatsapp;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.whatsapp.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.whatsapp.GroupNameActivity;
+import com.example.whatsapp.R;
 import com.example.whatsapp.User.UserListAdapter;
 import com.example.whatsapp.User.UserObject;
 import com.example.whatsapp.Utilis.CountryToPhonePrefix;
@@ -31,10 +35,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FindUserActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class find_userFragment extends Fragment {
 
+    public find_userFragment() {
+        // Required empty public constructor
+    }
+
+    View FindUserFragment;
     private RecyclerView mUserList;
-    private RecyclerView.Adapter mUserListAdapter;
+    private androidx.recyclerview.widget.RecyclerView.Adapter mUserListAdapter;
     private RecyclerView.LayoutManager mUserListLayoutManager;
 
     private TextView mCreate,mCancel;
@@ -48,19 +60,19 @@ public class FindUserActivity extends AppCompatActivity {
     UserObject currentUser = new UserObject(FirebaseAuth.getInstance().getUid());
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_user);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        FindUserFragment = inflater.inflate(R.layout.fragment_find_user, container, false);
+        //Code
         userList = new ArrayList<>();
         contactList = new ArrayList<>();
-        mCreate = findViewById(R.id.create);
-        mCancel = findViewById(R.id.cancelBtn);
+        mCreate = FindUserFragment.findViewById(R.id.create);
+        mCancel = FindUserFragment.findViewById(R.id.cancelBtn);
 
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
             }
         });
 
@@ -68,17 +80,14 @@ public class FindUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createChat();
-            }
+                getFragmentManager().beginTransaction().replace(R.id.frame_layout,new chatFragment()).commit();            }
         });
 
         initialiseRecyclerView();
         getContactList();
         getCurrentUserInfo();
-
-
+        return FindUserFragment;
     }
-
-
 
     private void createChat(){
         String key = FirebaseDatabase.getInstance().getReference().child("chat").push().getKey();
@@ -117,17 +126,14 @@ public class FindUserActivity extends AppCompatActivity {
 
             chatName2.put("chatName" , selectedUsers.get(0).getName());
             if (selectedUsers.get(0).getProfileImageLink()!="")
-            chatName2.put("chatIcon",selectedUsers.get(0).getProfileImageLink());
-
-
+                chatName2.put("chatIcon",selectedUsers.get(0).getProfileImageLink());
             userDb.child(FirebaseAuth.getInstance().getUid()).child("chat").child(key).setValue(true);
             userDb.child(FirebaseAuth.getInstance().getUid()).child("chat").child(key).updateChildren(chatName2);
-            finish();
         }else if (selectedUsers.size()>1){ // Group chat room
             newChatMap.put("chatType","1");
             chatInfoDb.updateChildren(newChatMap);
             userDb.child(FirebaseAuth.getInstance().getUid()).child("chat").child(chatId).setValue(true);
-            Intent intent = new Intent(getApplicationContext(),GroupNameActivity.class);
+            Intent intent = new Intent(getContext(), GroupNameActivity.class);
             intent.putExtra("chatId",key);
             startActivityForResult(intent,1);
         }
@@ -135,7 +141,7 @@ public class FindUserActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
             if (resultCode == 1){
@@ -151,7 +157,6 @@ public class FindUserActivity extends AppCompatActivity {
                 userDb.child(FirebaseAuth.getInstance().getUid()).child("chat").child(chatId).child("chatName").setValue(chatName);
             }
         }
-        finish();
     }
 
     private void getCurrentUserInfo(){
@@ -182,7 +187,7 @@ public class FindUserActivity extends AppCompatActivity {
 
     private void getContactList(){
         String ISOPrefix = getCountryIso();
-        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,null);
+        Cursor phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,null);
 
         while(phones.moveToNext()){
             String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
@@ -234,9 +239,9 @@ public class FindUserActivity extends AppCompatActivity {
                         UserObject mUserObject = new UserObject(name, phone,childSnapshot.getKey());
                         mUserObject.setProfileImageLink(profileImageLink);
 
-                    userList.add(mUserObject);
-                    mUserListAdapter.notifyDataSetChanged();
-                    return;
+                        userList.add(mUserObject);
+                        mUserListAdapter.notifyDataSetChanged();
+                        return;
                     }
                 }
             }
@@ -250,7 +255,7 @@ public class FindUserActivity extends AppCompatActivity {
 
     private String getCountryIso(){
         String iso = null;
-        TelephonyManager telephonyManager = (TelephonyManager) getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+        TelephonyManager telephonyManager = (TelephonyManager) getContext().getSystemService(getContext().TELEPHONY_SERVICE);
         if(telephonyManager.getNetworkCountryIso()!=null){
             if (!telephonyManager.getNetworkCountryIso().equals("")){
                 iso = telephonyManager.getNetworkCountryIso();
@@ -264,18 +269,13 @@ public class FindUserActivity extends AppCompatActivity {
 
     @SuppressLint("WrongConstant")
     private void initialiseRecyclerView() {
-        mUserList = findViewById(R.id.userList);
+        mUserList = FindUserFragment.findViewById(R.id.userList);
         mUserList.setNestedScrollingEnabled(false);
         mUserList.setHasFixedSize(false);
-        mUserListLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL,false);
+        mUserListLayoutManager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL,false);
         mUserList.setLayoutManager(mUserListLayoutManager);
         mUserListAdapter = new UserListAdapter(userList);
         mUserList.setAdapter(mUserListAdapter);
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-    }
 }
