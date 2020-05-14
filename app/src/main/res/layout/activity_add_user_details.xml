@@ -6,13 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".AddUserDetailsActivity"
     android:orientation="vertical"
-    android:background="@drawable/mainpagebackground">
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/chats_layout">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:text="cancel"
+            android:id="@+id/cancelBtn"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:gravity="center"
+            android:textColor="@color/blue"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".6"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="40dp" />
+        <TextView
+            android:id="@+id/create"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="14sp" />
+    </LinearLayout>
 
    <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="300dp"
+       android:layout_marginTop="40dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:layout_gravity="center">
+       android:layout_gravity="center"
+       android:gravity="center_horizontal">
 
        <de.hdodenhof.circleimageview.CircleImageView
            android:layout_width="200dp"
@@ -21,12 +61,11 @@
            android:src="@mipmap/ic_launcher_round"
            app:civ_border_width="2dp"
            android:layout_gravity="center"
-           android:layout_marginTop="30dp"
            app:civ_border_color="#FF000000"/>
        <ImageView
            android:id="@+id/editProfileImage"
            android:layout_gravity="bottom"
-           android:layout_width="match_parent"
+           android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            app:srcCompat="@android:drawable/ic_menu_edit" />
 
@@ -38,7 +77,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:hint="Enter Name" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:text="PHONE NUMBER"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/phoneno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:textSize="20dp"
+        android:hint="Phone Number" />
 
     <Button
         android:layout_marginTop="20dp"

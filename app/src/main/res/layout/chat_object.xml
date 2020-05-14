@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:id="@+id/layout"
-    android:background="@color/lightBlue">
+    android:background="#FFFFFF">
 
     <de.hdodenhof.circleimageview.CircleImageView
 
@@ -20,13 +20,21 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight=".8"
         android:layout_height="wrap_content"
         android:padding="20sp"
         android:text="Title"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/white"
+        android:textColor="#000"
         android:textSize="30dp" />
+
+    <ImageView
+        android:layout_gravity="center_vertical"
+        android:layout_weight=".1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_navigate_next_black_24dp"/>
 
 
 

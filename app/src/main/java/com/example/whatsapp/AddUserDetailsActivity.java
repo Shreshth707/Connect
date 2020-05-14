@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -40,6 +41,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AddUserDetailsActivity extends AppCompatActivity {
 
     private Button mConfirm;
+    private TextView mCancel,mPhone;
     private EditText mName;
     private CircleImageView mProfileImage;
     private ImageView mEditProfileImage;
@@ -52,6 +54,8 @@ public class AddUserDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user_details);
 
+        mPhone = findViewById(R.id.phoneno);
+        mCancel =findViewById(R.id.cancelBtn);
         mEditProfileImage = findViewById(R.id.editProfileImage);
         mProfileImage = findViewById(R.id.profileImage);
         mName = findViewById(R.id.username);
@@ -73,6 +77,12 @@ public class AddUserDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addNameToUserDataBase();
+            }
+        });
+        mCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -148,11 +158,15 @@ public class AddUserDetailsActivity extends AppCompatActivity {
                     //Picasso.get().load(profileImage).into(mProfileImage);
                     Glide.with(AddUserDetailsActivity.this).load(profileImage).placeholder(R.drawable.ic_launcher_background).into(mProfileImage);
                 }else if (dataSnapshot.exists()){
-                    String UserName = "";
+                    String UserName = "",phone = "";
                     if (dataSnapshot.child("name").getValue()!=null){
                         UserName = dataSnapshot.child("name").getValue().toString();
                     }
+                    if (dataSnapshot.child("phone").getValue()!=null){
+                        phone = dataSnapshot.child("phone").getValue().toString();
+                    }
                     mName.setText(UserName);
+                    mPhone.setText(phone);
                 }
             }
 

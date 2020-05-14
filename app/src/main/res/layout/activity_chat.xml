@@ -4,27 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity">
+    tools:context=".ChatActivity"
+    android:background="#FFFF">
 
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:id="@+id/titleBar"
-        android:background="@color/messageTextBarColor">
-        <Button
-            android:layout_weight="0.1"
+        android:padding="6dp"
+        android:background="#E7E6EC">
+        <ImageView
             android:layout_width="0dp"
-            android:layout_gravity="center_vertical"
-            android:layout_height="wrap_content"
+            android:layout_weight=".1"
+            android:layout_height="match_parent"
             android:id="@+id/backBtn"
-            android:background="@drawable/backicon"/>
+            android:background="@drawable/ic_arrow_back_black_24dp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
         <TextView
-            android:layout_weight="0.9"
+            android:layout_weight="0.7"
             android:layout_width="0dp"
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
             android:textColor="#000000"
+            android:text="Name"
+            android:paddingLeft="10dp"
             android:textSize="36dp"
             android:id="@+id/chatName"/>
     </LinearLayout>
@@ -34,17 +45,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleBar"
-        android:layout_above="@+id/sendLayout"
-         />
+        android:layout_above="@+id/sendLayout" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="6dp"
+        android:background="#E7E6EC"
         android:layout_alignParentBottom="true"
         android:id="@+id/sendLayout">
         
         <EditText
             android:layout_weight="0.8"
+            android:paddingLeft="4dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -53,10 +66,10 @@
             android:id="@+id/Message"
             android:hint="Message....."/>
         <Button
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
             android:layout_width="0dp"
-            android:layout_height="76dp"
-            android:background="@drawable/sendicon"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_send_black_24dp"
             android:id="@+id/send"/>
     </LinearLayout>
 

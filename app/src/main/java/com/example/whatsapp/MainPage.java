@@ -11,6 +11,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,6 +21,7 @@ import com.example.whatsapp.Chat.ChatListAdapter;
 import com.example.whatsapp.Chat.ChatObject;
 import com.example.whatsapp.User.UserObject;
 import com.example.whatsapp.Utilis.SpacingDecorator;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +37,7 @@ public class MainPage extends AppCompatActivity {
     private RecyclerView mChatList;
     private RecyclerView.Adapter mChatListAdapter;
     private RecyclerView.LayoutManager mChatListLayoutManager;
-
+    private BottomNavigationView bottomNavigationView;
     ArrayList<ChatObject> chatList;
 
     @Override
@@ -52,23 +55,27 @@ public class MainPage extends AppCompatActivity {
         });
         OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification);
 
-        Button mSettings = findViewById(R.id.settings);
-        Button mFindUser = findViewById(R.id.findUser);
 
-        mFindUser.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView = findViewById(R.id.bottom);
+        bottomNavigationView.setSelectedItemId(R.id.chat);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),FindUserActivity.class));
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-            }
-        });
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.settings:
+                        Intent intent = new Intent (getApplicationContext(),SettingsActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                        break;
+                    case R.id.chat:
 
-        mSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (getApplicationContext(),SettingsActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                        break;
+                    case R.id.findUser:
+                        startActivity(new Intent(getApplicationContext(),FindUserActivity.class));
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                        break;
+                }
+                return true;
             }
         });
 

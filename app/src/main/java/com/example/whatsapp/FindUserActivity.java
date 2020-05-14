@@ -15,6 +15,7 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.whatsapp.User.UserListAdapter;
 import com.example.whatsapp.User.UserObject;
@@ -36,7 +37,7 @@ public class FindUserActivity extends AppCompatActivity {
     private RecyclerView.Adapter mUserListAdapter;
     private RecyclerView.LayoutManager mUserListLayoutManager;
 
-    private Button mRefresh,mCreate;
+    private TextView mCreate,mCancel;
 
     DatabaseReference chatInfoDb;
     DatabaseReference userDb;
@@ -53,14 +54,16 @@ public class FindUserActivity extends AppCompatActivity {
 
         userList = new ArrayList<>();
         contactList = new ArrayList<>();
-        mRefresh = findViewById(R.id.refresh);
-        mRefresh.setOnClickListener(new View.OnClickListener() {
+        mCreate = findViewById(R.id.create);
+        mCancel = findViewById(R.id.cancelBtn);
+
+        mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getContactList();
+                finish();
             }
         });
-        mCreate = findViewById(R.id.create);
+
         mCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +144,9 @@ public class FindUserActivity extends AppCompatActivity {
                 for (UserObject selectedUser : selectedUsers){
                     userDb.child(selectedUser.getUid()).child("chat").child(chatId).setValue(true);
                     userDb.child(selectedUser.getUid()).child("chat").child(chatId).child("chatName").setValue(chatName);
-                    userDb.child(selectedUser.getUid()).child("chat").child(chatId).child("chatIcon").setValue(chatIconUrl);
+                    if (chatIconUrl!=""){
+                        userDb.child(selectedUser.getUid()).child("chat").child(chatId).child("chatIcon").setValue(chatIconUrl);
+                    }
                 }
                 userDb.child(FirebaseAuth.getInstance().getUid()).child("chat").child(chatId).child("chatName").setValue(chatName);
             }

@@ -39,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GroupNameActivity extends AppCompatActivity {
 
-    Button mConfirm;
+    TextView mConfirm;
     EditText mGroupName;
     ImageView mAddGroupIcon;
     CircleImageView mGroupIcon;

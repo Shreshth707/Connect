@@ -32,47 +32,17 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
     @NonNull
     @Override
     public ChatListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layoutView = null;
-        if (viewType == 0){
-            layoutView = LayoutInflater.from(parent .getContext()).inflate(R.layout.item_chat_red,null,false);
-            RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutView.setLayoutParams(lp);
-        }else if(viewType == 1){
-            layoutView = LayoutInflater.from(parent .getContext()).inflate(R.layout.item_chat_yellow,null,false);
-            RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutView.setLayoutParams(lp);
-        }else if (viewType == 2){
-            layoutView = LayoutInflater.from(parent .getContext()).inflate(R.layout.item_chat_light_green,null,false);
-            RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutView.setLayoutParams(lp);
-        }else if (viewType == 3){
-            layoutView = LayoutInflater.from(parent .getContext()).inflate(R.layout.item_chat_green,null,false);
-            RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutView.setLayoutParams(lp);
-        }else if(viewType == 4) {
-            layoutView = LayoutInflater.from(parent .getContext()).inflate(R.layout.item_chat_light_blue,null,false);
-            RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutView.setLayoutParams(lp);
-        }else if (viewType == 5) {
-            layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_blue, null, false);
-            RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutView.setLayoutParams(lp);
-        } else if(viewType == 6){
-            layoutView = LayoutInflater.from(parent .getContext()).inflate(R.layout.item_chat_purple,null,false);
-            RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutView.setLayoutParams(lp);
-        }
-
-
+        View layoutView = LayoutInflater.from(parent .getContext()).inflate(R.layout.chat_object,null,false);
+        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutView.setLayoutParams(lp);
         ChatListViewHolder rcv = new ChatListViewHolder(layoutView);
         return rcv;
     }
-
     @Override
     public void onBindViewHolder(@NonNull final ChatListViewHolder holder, final int position) {
         holder.mTitle.setText(chatList.get(position).getName());
         if (chatList.get(position).getChatIconLink()!=""){
-            Glide.with(holder.itemView).load(chatList.get(position).getChatIconLink()).into(holder.mChatIcon);
+            Glide.with(holder.itemView).load(chatList.get(position).getChatIconLink()).placeholder(R.mipmap.ic_launcher_round).into(holder.mChatIcon);
         }
         holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +54,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return chatList.size();
@@ -100,10 +69,5 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
             mTitle = view.findViewById(R.id.title);
             mLayout = view.findViewById(R.id.layout);
         }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return (position % 7);
     }
 }

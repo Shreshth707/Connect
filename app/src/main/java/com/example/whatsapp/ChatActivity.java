@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,10 +51,9 @@ public class ChatActivity extends AppCompatActivity {
 
         mChatObject = (ChatObject) getIntent().getSerializableExtra("chatObject");
         Button mSend = findViewById(R.id.send);
-        TextView mChatName = findViewById(R.id.changeName);
-        Button mBackBtn = findViewById(R.id.backBtn);
+        ImageView mBackBtn = findViewById(R.id.backBtn);
 
-        //mChatName.setText(getIntent().getStringExtra("chatName"));
+
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
