@@ -23,7 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".GroupNameActivity" />
-        <activity android:name=".SettingsActivity" />
         <activity android:name=".AddUserDetailsActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".MainPage" />

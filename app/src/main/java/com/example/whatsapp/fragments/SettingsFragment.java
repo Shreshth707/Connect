@@ -51,8 +51,8 @@ public class SettingsFragment extends Fragment {
         // Inflate the layout for this fragment
         SettingsFragment = inflater.inflate(R.layout.fragment_settings, container, false);
         //Code
-        mName = SettingsFragment.findViewById(R.id.name);
-        mPhone = SettingsFragment.findViewById(R.id.phone);
+        mName = SettingsFragment.findViewById(R.id.Name);
+        mPhone = SettingsFragment.findViewById(R.id.phone_no);
         mUpdateProfile = SettingsFragment.findViewById(R.id.updateProfile);
         mLogout = SettingsFragment.findViewById(R.id.logout);
         mProfileImage = SettingsFragment.findViewById(R.id.profileImage);
@@ -97,9 +97,9 @@ public class SettingsFragment extends Fragment {
                         name = dataSnapshot.child("name").getValue().toString();
                     }
                     Log.e("Name",name + " " + phone);
-                    /**mName.setText(name);
+                    mName.setText(name);
                      mPhone.setText(phone);
-                     **/
+
                     if (profileImageLink != "") {
                         Glide.with(getContext())
                                 .load(profileImageLink)

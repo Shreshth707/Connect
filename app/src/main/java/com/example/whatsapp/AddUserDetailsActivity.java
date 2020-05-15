@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -147,14 +148,18 @@ public class AddUserDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("image"))){
-                    String UserName = "",profileImage="";
+                    String UserName = "",profileImage="",phone = "";
                     if (dataSnapshot.child("name").getValue()!=null){
                         UserName = dataSnapshot.child("name").getValue().toString();
                     }
                     if (dataSnapshot.child("image").getValue()!=null){
                         profileImage = dataSnapshot.child("image").getValue().toString();
                     }
+                    if (dataSnapshot.child("phone").getValue()!=null){
+                        phone = dataSnapshot.child("phone").getValue().toString();
+                    }
                     mName.setText(UserName);
+                    mPhone.setText(phone);
                     //Picasso.get().load(profileImage).into(mProfileImage);
                     Glide.with(AddUserDetailsActivity.this).load(profileImage).placeholder(R.drawable.ic_launcher_background).into(mProfileImage);
                 }else if (dataSnapshot.exists()){

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.whatsapp.GroupNameActivity;
 import com.example.whatsapp.R;
@@ -81,7 +82,9 @@ public class find_userFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 createChat();
-                getFragmentManager().beginTransaction().replace(R.id.frame_layout,new chatFragment()).commit();            }
+                Toast.makeText(getContext(),"Chat Created",Toast.LENGTH_SHORT).show();
+                //getFragmentManager().beginTransaction().replace(R.id.frame_layout,new chatFragment()).commit();
+                }
         });
 
         initialiseRecyclerView();
@@ -158,6 +161,7 @@ public class find_userFragment extends Fragment {
                 userDb.child(FirebaseAuth.getInstance().getUid()).child("chat").child(chatId).child("chatName").setValue(chatName);
             }
         }
+        getFragmentManager().beginTransaction().replace(R.id.frame_layout,new chatFragment()).commit();
     }
 
     private void getCurrentUserInfo(){

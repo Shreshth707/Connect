@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.example.whatsapp.Chat.ChatObject;
 import com.example.whatsapp.Chat.MessageAdapter;
 import com.example.whatsapp.Chat.MessageObject;
@@ -33,12 +34,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ChatActivity extends AppCompatActivity {
 
     private RecyclerView mChat;
     private RecyclerView.Adapter mChatAdapter;
     private RecyclerView.LayoutManager mChatLayoutManager;
-
+    private TextView mchatName;
+    private CircleImageView mcircleImageView;
     ChatObject mChatObject;
     ArrayList<MessageObject> messageList;
     DatabaseReference mChatMessagesDb;
@@ -50,6 +54,13 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         mChatObject = (ChatObject) getIntent().getSerializableExtra("chatObject");
+
+        mcircleImageView = findViewById(R.id.profileImage);
+        if (mChatObject.getChatIconLink()!=""){
+            Glide.with(getApplicationContext()).load(mChatObject.getChatIconLink()).placeholder(R.mipmap.ic_launcher_round).into(mcircleImageView);
+        }
+        mchatName = findViewById(R.id.chatName);
+        mchatName.setText(mChatObject.getName());
         Button mSend = findViewById(R.id.send);
         ImageView mBackBtn = findViewById(R.id.backBtn);
 
