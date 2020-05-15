@@ -73,6 +73,7 @@ public class find_userFragment extends Fragment {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frame_layout,new chatFragment()).commit();
             }
         });
 
