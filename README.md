@@ -3,7 +3,10 @@
  It is an E Messaging based application through which you can create private chats as well as can create group chats and manage them.
 
 # UI Design
-  <img src = "Connect UI/Chat Home.png" width = 200>
-  <img src = "Connect UI/Create New Chat.png" width = 200>
-  <img src = "Connect UI/Settings.png" width = 200>
-  <img src = "Connect UI/Add User Details.png" width = 200>
+ <p>
+ <img src = "Connect UI/Chat Home.png" width = 171>
+  <img src = "Connect UI/Chat Activity.png" width = 171>
+  <img src = "Connect UI/Create New Chat.png" width = 171>
+  <img src = "Connect UI/Settings.png" width = 171>
+  <img src = "Connect UI/Add User Details.png" width = 171>
+</p>
