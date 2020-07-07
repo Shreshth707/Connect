@@ -32,20 +32,35 @@
         android:layout_width="match_parent"
         android:layout_height="542dp"
         android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/phonenumber"
+        <LinearLayout
             android:layout_width="244dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="195dp"
-            android:hint = "Enter Phone No"
-            android:textStyle="italic"
-            android:paddingLeft="70dp"
-            android:background="@drawable/phoneno"/>
+            android:layout_marginTop="195dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+91"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_gravity="center" />
+            <EditText
+                android:id="@+id/phonenumber"
+                android:inputType="phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint = "Enter Phone No"
+                android:textStyle="italic"
+                android:paddingLeft="45dp"
+                android:background="@drawable/phoneno"/>
+        </LinearLayout>
+
+
+
 
         <EditText
             android:id="@+id/code"
+            android:inputType="number"
             android:layout_width="244dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

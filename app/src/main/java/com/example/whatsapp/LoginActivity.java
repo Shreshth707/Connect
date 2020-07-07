@@ -82,6 +82,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void verifyPhoneNumberWithCode(){
+        String code = mCode.getText().toString();
+        if(code.length()==0){
+            mCode.requestFocus();
+            mCode.setError("Enter Verification Code");
+            return;
+        }
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId,mCode.getText().toString());
         signInWithPhoneAuthCredential(credential);
     }
@@ -120,6 +126,9 @@ public class LoginActivity extends AppCompatActivity {
                         });
                     }
 
+                }else {
+                    Toast.makeText(getApplicationContext(),"Verification Failed", Toast.LENGTH_SHORT).show();
+                    mCode.setError("Please Enter Correct Code");
                 }
 
             }
@@ -137,8 +146,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startPhoneNumberVerification() {
+        String phoneno = mPhoneNumber.getText().toString();
+        if(phoneno.length()==0){
+            mPhoneNumber.requestFocus();
+            mPhoneNumber.setError("Enter Phone Number");
+            return;
+        }else if(phoneno.length()<10){
+            mPhoneNumber.setError("Enter a Valid Phone No");
+            return;
+        }
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                mPhoneNumber.getText().toString(),60, TimeUnit.SECONDS,this,mCallbacks);
+                "+91"+mPhoneNumber.getText().toString(),60, TimeUnit.SECONDS,this,mCallbacks);
     }
 
 
